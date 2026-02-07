@@ -29,6 +29,7 @@ input{padding:10px;border:none;border-radius:10px;width:200px;text-align:center}
 .sad-popup{position:fixed;top:30%;left:50%;transform:translateX(-50%);background:#ffdde1;padding:20px 30px;border-radius:20px;font-size:22px;box-shadow:0 10px 25px rgba(0,0,0,.3);animation:shake .5s ease;z-index:9999}
 @keyframes shake{0%{transform:translateX(-50%) translateX(0)}25%{transform:translateX(-50%) translateX(-10px)}50%{transform:translateX(-50%) translateX(10px)}75%{transform:translateX(-50%) translateX(-10px)}100%{transform:translateX(-50%) translateX(0)}}
 .shake{animation:shake .4s ease}
+.typing-letter{font-size:1.15rem;min-height:70px;white-space:wrap}
 </style>
 </head>
 <body>
@@ -54,9 +55,16 @@ input{padding:10px;border:none;border-radius:10px;width:200px;text-align:center}
 
 </div>
 
+
+
+<div class="section">
+<h2>⏳ Together Since</h2>
+<div id="loveTimer" style="font-size:1.4rem;font-weight:bold"></div>
+</div>
+
 <div class="section">
 <h2>💌 Love Letter for Sana</h2>
-<p>Sana, you changed my life with your smile, your kindness and your love. Every heartbeat of mine whispers your name. I promise to love you forever ❤️</p>
+<p id="loveLetter" class="typing-letter"></p>
 </div>
 
 <div class="popup" id="popup">
@@ -85,14 +93,14 @@ input{padding:10px;border:none;border-radius:10px;width:200px;text-align:center}
 <script>
 const correctDate = "15/11/2025";
 const cards = {
- 1:{title:"Rose Day 🌹",text:"Sana, my love blooms only for you 💕"},
- 2:{title:"Propose Day 💍",text:"I choose you forever ❤️"},
- 3:{title:"Chocolate Day 🍫",text:"Life is sweeter with you 😘"},
- 4:{title:"Teddy Day 🧸",text:"You are my comfort 🤍"},
- 5:{title:"Promise Day 🤝",text:"I will never leave you 💖"},
- 6:{title:"Hug Day 🤗",text:"My arms are your home 🤍"},
- 7:{title:"Kiss Day 💋",text:"Forever love 💕"},
- 8:{title:"Valentine’s Day ❤️",text:"You are my forever Sana 💍💖"}
+ 1:{title:"Rose Day 🌹",text:"Sana my beautiful rose 🌹, you are my chocolate sweet love, my heartbeat and my happiness. Every petal reminds me of your smile 💕"},
+ 2:{title:"Propose Day 💍",text:"My love Sana ❤️ I don’t just choose you today, I choose you in every lifetime. Be mine forever, my heart already belongs to you 💍"},
+ 3:{title:"Chocolate Day 🍫",text:"My sweet chocolate Sana 😘 life feels delicious with you. Your love melts my worries just like chocolate melts in mouth 🍫❤️"},
+ 4:{title:"Teddy Day 🧸",text:"My cute teddy Sana 🧸 you are my comfort, my warmth and my safe place. When I hug you, the world feels perfect 🤍"},
+ 5:{title:"Promise Day 🤝",text:"I promise you Sana 💖 to love you in every situation, support you in every dream and hold your hand forever 🤝❤️"},
+ 6:{title:"Hug Day 🤗",text:"Come into my arms Sana 🤗 my hugs are your home, my heart is your shelter and my love is your forever place 🤍💞"},
+ 7:{title:"Kiss Day 💋",text:"My love Sana 💋 every kiss is my soul telling you how deeply I love you. You are my forever romance 💕🔥"},
+ 8:{title:"Valentine’s Day ❤️",text:"Happy Valentine’s my Sana ❤️ you are my chocolate, my teddy, my best friend and my forever love. My heart beats only for you 💍💖"}
 };
 
 let unlocked=false;
@@ -210,6 +218,29 @@ setInterval(()=>{
  p.style.display='block';
  setTimeout(()=>p.style.display='none',3000);
 },8000);
+
+
+
+const meetDateObj=new Date(2025,10,15);
+function updateLoveTimer(){
+ const now=new Date();
+ const diff=now-meetDateObj;
+ const days=Math.floor(diff/86400000);
+ const hrs=Math.floor(diff/3600000)%24;
+ const mins=Math.floor(diff/60000)%60;
+ loveTimer.innerText=`${days} days ${hrs} hours ${mins} minutes of love ❤️`;
+}
+setInterval(updateLoveTimer,1000);updateLoveTimer();
+
+const letterText="Sana, you changed my life with your smile, your kindness and your love. Every heartbeat of mine whispers your name. I promise to love you forever ❤️";
+let li=0;
+function typeLetter(){
+ if(li < letterText.length){
+  document.getElementById('loveLetter').innerHTML += letterText[li++];
+  setTimeout(typeLetter,60);
+ }
+}
+typeLetter();
 
 // Tests
 console.assert(correctDate === '15/11/2025','Correct date should be set');
